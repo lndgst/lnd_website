@@ -33,12 +33,17 @@
 <script>
     document.querySelectorAll('p').forEach(p => {
         const text = p.textContent;
-        p.innerHTML = '';
+        p.textContent = '';
+        p.style.whiteSpace = 'pre-wrap';
         [...text].forEach(ch => {
-            const span = document.createElement('span');
-            span.className = 'letter';
-            span.textContent = ch;
-            p.appendChild(span);
+            if (ch === ' ') {
+                p.appendChild(document.createTextNode(' '));
+            } else {
+                const span = document.createElement('span');
+                span.className = 'letter';
+                span.textContent = ch;
+                p.appendChild(span);
+            }
         });
 
         p.addEventListener('mousemove', e => {
@@ -54,17 +59,10 @@
                 const dy = ly - my;
                 const dist = Math.hypot(dx, dy);
                 if (dist < radius) {
-                    const force = (radius - dist) / radius;
-                    letter.style.transform = `translate(${dx * force}px, ${dy * force}px)`;
-                } else {
-                    letter.style.transform = '';
+                    const tx = (Math.random() - 0.5) * 20;
+                    const ty = (Math.random() - 0.5) * 20;
+                    letter.style.transform = `translate(${tx}px, ${ty}px)`;
                 }
-            });
-        });
-
-        p.addEventListener('mouseleave', () => {
-            p.querySelectorAll('.letter').forEach(letter => {
-                letter.style.transform = '';
             });
         });
     });
