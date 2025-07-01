@@ -14,6 +14,10 @@
             margin: 40px auto;
             line-height: 1.6;
         }
+        .letter {
+            display: inline-block;
+            transition: transform 0.1s ease;
+        }
     </style>
     <!-- Attempt to import shadcn UI library -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shadcn-ui/dist/shadcn-ui.min.css">
@@ -27,22 +31,41 @@
     <p>One day I will find the energy to put together an online portfolio. Maybe. In the meanwhile, here's a write-up about my work at Archetype: FastCo, and a podcast: Design This Day. And a couple of articles about my previous work at Google: FastCo, Wired</p>
 </body>
 <script>
-    function scramble(text) {
-        const arr = text.split('');
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr.join('');
-    }
-
     document.querySelectorAll('p').forEach(p => {
-        p.dataset.original = p.textContent;
-        p.addEventListener('mousemove', () => {
-            p.textContent = scramble(p.dataset.original);
+        const text = p.textContent;
+        p.innerHTML = '';
+        [...text].forEach(ch => {
+            const span = document.createElement('span');
+            span.className = 'letter';
+            span.textContent = ch;
+            p.appendChild(span);
         });
+
+        p.addEventListener('mousemove', e => {
+            const mx = e.clientX;
+            const my = e.clientY;
+            const radius = 50;
+
+            p.querySelectorAll('.letter').forEach(letter => {
+                const r = letter.getBoundingClientRect();
+                const lx = r.left + r.width / 2;
+                const ly = r.top + r.height / 2;
+                const dx = lx - mx;
+                const dy = ly - my;
+                const dist = Math.hypot(dx, dy);
+                if (dist < radius) {
+                    const force = (radius - dist) / radius;
+                    letter.style.transform = `translate(${dx * force}px, ${dy * force}px)`;
+                } else {
+                    letter.style.transform = '';
+                }
+            });
+        });
+
         p.addEventListener('mouseleave', () => {
-            p.textContent = p.dataset.original;
+            p.querySelectorAll('.letter').forEach(letter => {
+                letter.style.transform = '';
+            });
         });
     });
 </script>
