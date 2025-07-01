@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leonardo Giusti</title>
     <style>
+        html {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Ccircle cx='5' cy='5' r='5' fill='black'/%3E%3C/svg%3E") 5 5, auto;
+        }
         body {
             font-family: var(--font-sans, sans-serif);
             max-width: 600px;
             margin: 40px auto;
             line-height: 1.6;
-            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='5' height='5'%3E%3Ccircle cx='2.5' cy='2.5' r='2.5' fill='black'/%3E%3C/svg%3E") 2 2, auto;
         }
     </style>
     <!-- Attempt to import shadcn UI library -->
@@ -24,4 +26,24 @@
 
     <p>One day I will find the energy to put together an online portfolio. Maybe. In the meanwhile, here's a write-up about my work at Archetype: FastCo, and a podcast: Design This Day. And a couple of articles about my previous work at Google: FastCo, Wired</p>
 </body>
+<script>
+    function scramble(text) {
+        const arr = text.split('');
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr.join('');
+    }
+
+    document.querySelectorAll('p').forEach(p => {
+        p.dataset.original = p.textContent;
+        p.addEventListener('mousemove', () => {
+            p.textContent = scramble(p.dataset.original);
+        });
+        p.addEventListener('mouseleave', () => {
+            p.textContent = p.dataset.original;
+        });
+    });
+</script>
 </html>
