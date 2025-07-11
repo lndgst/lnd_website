@@ -26,30 +26,36 @@
 <body>
     <p>Hello, my name is Leonardo Giusti.</p>
 
-    <p>I am Founder and Design Director at Archetype AI​. Before, I was Head of Design at Google ATAP - Project Soli and Jacquard, Design Lead at Samsung Design, and a Researcher at MIT Design Lab.</p>
+    <p>I am Founder and Design Director at <a href="https://www.archetypeai.io">Archetype AI</a>. Before, I was Head of Design at Google ATAP - Project Soli and Jacquard, Design Lead at Samsung Design, and a Researcher at MIT Design Lab.</p>
 
-    <p>One day I will find the energy to put together an online portfolio. Maybe. In the meanwhile, here's a write-up about my work at Archetype: FastCo, and a podcast: Design This Day. And a couple of articles about my previous work at Google: FastCo, Wired</p>
+    <p>One day I will find the energy to put together an online portfolio. Maybe. In the meanwhile, here's a write-up about my work at <a href="https://www.archetypeai.io">Archetype AI</a>: FastCo, and a podcast: Design This Day. And a couple of articles about my previous work at Google: FastCo, Wired</p>
 </body>
 <script>
     document.querySelectorAll('p').forEach(p => {
-        const text = p.textContent;
-        p.textContent = '';
+        const name = 'Leonardo Giusti';
+        const nodes = Array.from(p.childNodes);
+        p.innerHTML = '';
         p.style.whiteSpace = 'pre-wrap';
 
-        const name = 'Leonardo Giusti';
-        const start = text.indexOf(name);
-
-        [...text].forEach((ch, i) => {
-            const inName = start !== -1 && i >= start && i < start + name.length;
-            if (inName) {
-                p.appendChild(document.createTextNode(ch));
-            } else if (ch === ' ') {
-                p.appendChild(document.createTextNode(' '));
-            } else {
-                const span = document.createElement('span');
-                span.className = 'letter';
-                span.textContent = ch;
-                p.appendChild(span);
+        nodes.forEach(node => {
+            if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'A') {
+                p.appendChild(node.cloneNode(true));
+            } else if (node.nodeType === Node.TEXT_NODE) {
+                const text = node.textContent;
+                const start = text.indexOf(name);
+                [...text].forEach((ch, i) => {
+                    const inName = start !== -1 && i >= start && i < start + name.length;
+                    if (inName) {
+                        p.appendChild(document.createTextNode(ch));
+                    } else if (ch === ' ') {
+                        p.appendChild(document.createTextNode(' '));
+                    } else {
+                        const span = document.createElement('span');
+                        span.className = 'letter';
+                        span.textContent = ch;
+                        p.appendChild(span);
+                    }
+                });
             }
         });
 
