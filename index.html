@@ -35,8 +35,15 @@
         const text = p.textContent;
         p.textContent = '';
         p.style.whiteSpace = 'pre-wrap';
-        [...text].forEach(ch => {
-            if (ch === ' ') {
+
+        const name = 'Leonardo Giusti';
+        const start = text.indexOf(name);
+
+        [...text].forEach((ch, i) => {
+            const inName = start !== -1 && i >= start && i < start + name.length;
+            if (inName) {
+                p.appendChild(document.createTextNode(ch));
+            } else if (ch === ' ') {
                 p.appendChild(document.createTextNode(' '));
             } else {
                 const span = document.createElement('span');
