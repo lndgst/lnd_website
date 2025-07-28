@@ -3,82 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leonardo Giusti</title>
+    <title>Leonardo Giusti - Terminal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        html {
-            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Ccircle cx='5' cy='5' r='5' fill='black'/%3E%3C/svg%3E") 5 5, auto;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+
         body {
-            font-family: var(--font-sans, sans-serif);
-            max-width: 600px;
-            margin: 40px auto;
-            line-height: 1.6;
-            background-color: #FFDF8A;
+            font-family: 'Source Code Pro', monospace;
+            background-color: #0c0c0c;
+            color: #00ff00;
+            font-size: 14px;
+            line-height: 1.4;
+            padding: 20px;
+            min-height: 100vh;
         }
-        .letter {
-            display: inline-block;
-            transition: transform 0.1s ease;
+
+        .terminal {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #000000;
+            border: 1px solid #333;
+            border-radius: 5px;
+        }
+
+        .terminal-header {
+            background-color: #1a1a1a;
+            padding: 10px 15px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .terminal-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .btn-close { background-color: #ff5f57; }
+        .btn-minimize { background-color: #ffbd2e; }
+        .btn-maximize { background-color: #28ca42; }
+
+        .terminal-title {
+            color: #666;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        .terminal-body {
+            padding: 20px;
+        }
+
+        .prompt {
+            color: #00ff00;
+        }
+
+        .command {
+            color: #ffffff;
+        }
+
+        .output {
+            color: #cccccc;
+            margin-bottom: 15px;
+        }
+
+        .line {
+            margin-bottom: 5px;
+        }
+
+        .cursor {
+            background-color: #00ff00;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        a {
+            color: #0080ff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            color: #ffff00;
+        }
+
+        .comment {
+            color: #666666;
         }
     </style>
-    <!-- Attempt to import shadcn UI library -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shadcn-ui/dist/shadcn-ui.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/shadcn-ui/dist/shadcn-ui.min.js"></script>
 </head>
 <body>
-    <p>Hello, my name is Leonardo Giusti.</p>
+    <div class="terminal">
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <div class="btn btn-close"></div>
+                <div class="btn btn-minimize"></div>
+                <div class="btn btn-maximize"></div>
+            </div>
+            <div class="terminal-title">leonardo@personal:~</div>
+        </div>
+        
+        <div class="terminal-body">
+            <div class="line">
+                <span class="prompt">leonardo@personal:~$</span> <span class="command">whoami</span>
+            </div>
+            <div class="output section">
+                <div>Leonardo Giusti</div>
+                <div>Founder & Design Director at <a href="https://www.archetypeai.io">Archetype AI</a></div>
+            </div>
 
-    <p>I am Founder and Design Director at <a href="https://www.archetypeai.io">Archetype AI</a>. Before, I was Head of Design at Google ATAP - Project Soli and Jacquard, Design Lead at Samsung Design, and a Researcher at MIT Design Lab.</p>
+            <div class="line">
+                <span class="prompt">leonardo@personal:~$</span> <span class="command">cat experience.txt</span>
+            </div>
+            <div class="output section">
+                <div><span class="highlight">Current:</span> Archetype AI - Founder & Design Director</div>
+                <div><span class="highlight">Previous:</span></div>
+                <div>  • Google ATAP - Head of Design (Project Soli, Jacquard)</div>
+                <div>  • Samsung Design - Design Lead</div>
+                <div>  • MIT Design Lab - Researcher</div>
+            </div>
 
-    <p>One day I will find the energy to put together an online portfolio. Maybe. In the meanwhile, here's a write-up about my work at <a href="https://www.archetypeai.io">Archetype AI</a>: FastCo, and a podcast: Design This Day. And a couple of articles about my previous work at Google: FastCo, Wired</p>
+            <div class="line">
+                <span class="prompt">leonardo@personal:~$</span> <span class="command">ls -la projects/</span>
+            </div>
+            <div class="output section">
+                <div>drwxr-xr-x  archetype_ai/     <span class="comment"># AI-powered Newton platform</span></div>
+                <div>drwxr-xr-x  project_soli/     <span class="comment"># Radar-based gesture sensing</span></div>
+                <div>drwxr-xr-x  project_jacquard/ <span class="comment"># Conductive fabric interfaces</span></div>
+                <div>drwxr-xr-x  publications/     <span class="comment"># Research papers & patents</span></div>
+            </div>
+
+            <div class="line">
+                <span class="prompt">leonardo@personal:~$</span> <span class="command">cat contact.txt</span>
+            </div>
+            <div class="output section">
+                <div>email: <a href="mailto:leonardo.giusti@gmail.com">leonardo.giusti@gmail.com</a></div>
+                <div>linkedin: <a href="https://linkedin.com/in/leonardogiusti">linkedin.com/in/leonardogiusti</a></div>
+                <div>twitter: <a href="https://twitter.com/leonardogiusti">@leonardogiusti</a></div>
+                <div>instagram: <a href="https://instagram.com/leonardogiusti">@leonardogiusti</a></div>
+            </div>
+
+            <div class="line">
+                <span class="prompt">leonardo@personal:~$</span> <span class="command">grep -r "media" coverage/</span>
+            </div>
+            <div class="output section">
+                <div>coverage/wired.txt: Archetype AI features</div>
+                <div>coverage/fastco.txt: Google ATAP project coverage</div>
+                <div>coverage/various.txt: Publications & patents available</div>
+            </div>
+
+            <div class="line">
+                <span class="prompt">leonardo@personal:~$</span> <span class="command">echo "status"</span>
+            </div>
+            <div class="output section">
+                <div><span class="highlight">Building the future of AI interaction design</span></div>
+                <div class="comment"># Website coming soon. Soonish.</div>
+            </div>
+
+            <div class="line">
+                <span class="prompt">leonardo@personal:~$</span> <span class="cursor"> </span>
+            </div>
+        </div>
+    </div>
 </body>
-<script>
-    document.querySelectorAll('p').forEach(p => {
-        const name = 'Leonardo Giusti';
-        const nodes = Array.from(p.childNodes);
-        p.innerHTML = '';
-        p.style.whiteSpace = 'pre-wrap';
-
-        nodes.forEach(node => {
-            if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'A') {
-                p.appendChild(node.cloneNode(true));
-            } else if (node.nodeType === Node.TEXT_NODE) {
-                const text = node.textContent;
-                const start = text.indexOf(name);
-                [...text].forEach((ch, i) => {
-                    const inName = start !== -1 && i >= start && i < start + name.length;
-                    if (inName) {
-                        p.appendChild(document.createTextNode(ch));
-                    } else if (ch === ' ') {
-                        p.appendChild(document.createTextNode(' '));
-                    } else {
-                        const span = document.createElement('span');
-                        span.className = 'letter';
-                        span.textContent = ch;
-                        p.appendChild(span);
-                    }
-                });
-            }
-        });
-
-        p.addEventListener('mousemove', e => {
-            const mx = e.clientX;
-            const my = e.clientY;
-            const radius = 50;
-
-            p.querySelectorAll('.letter').forEach(letter => {
-                const r = letter.getBoundingClientRect();
-                const lx = r.left + r.width / 2;
-                const ly = r.top + r.height / 2;
-                const dx = lx - mx;
-                const dy = ly - my;
-                const dist = Math.hypot(dx, dy);
-                if (dist < radius) {
-                    const tx = (Math.random() - 0.5) * 20;
-                    const ty = (Math.random() - 0.5) * 20;
-                    letter.style.transform = `translate(${tx}px, ${ty}px)`;
-                }
-            });
-        });
-    });
-</script>
 </html>
