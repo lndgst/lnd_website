@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apple Health Trainer</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>your trainer</h1>
+        <p class="subtitle">recommendations from your Apple Health data, powered by Claude</p>
+      </header>
+
+      <section id="recommendation" class="card">
+        <div class="card-header">
+          <h2>today</h2>
+          <button id="refresh-btn" type="button">refresh</button>
+        </div>
+        <div id="rec-body" class="rec-body">
+          <p class="muted">loading…</p>
+        </div>
+      </section>
+
+      <section id="summary" class="card">
+        <div class="card-header">
+          <h2>recent data</h2>
+          <span id="data-stamp" class="muted small"></span>
+        </div>
+        <div id="summary-body">
+          <p class="muted">loading…</p>
+        </div>
+      </section>
+
+      <footer>
+        <p class="muted small">
+          send your health data to <code>/api/ingest</code> from an iOS Shortcut or Health Auto Export.
+          see <code>shortcut/README.md</code> for setup.
+        </p>
+      </footer>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
